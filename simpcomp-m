@@ -1,0 +1,25 @@
+function I = simpcomp( a, b, M, f )
+%
+%    I = simpcomp( a, b, M, f )
+%
+% Formula di Simpson composita: 
+% Inputs:
+%    a,b: estremi di integrazione,
+%    M: numero di sottointervalli (m=1 formula di integrazione semplice)
+%    f: funzione
+% Output:
+%    I: integrale calcolato
+
+h = ( b - a ) / M; % ampiezza dei sottointervalli
+xestr = [ a : h : b ];               % estremi dei sottointervalli
+xmed = [ a + h / 2: h : b - h / 2 ]; % punti medi dei sottointervalli
+
+yestr = f( xestr );
+ymed = f( xmed );
+
+%I = ( h / 6 ) * ( sum(yestr(1:end-1) ) + 4*sum( ymed ) + sum( yestr(2:end) ) );
+I = ( h / 6) * ( yestr(1) + 2*sum(yestr(2:end-1))+ yestr(end) + 4*sum( ymed ) );
+
+% IPM = pmedcomp(a,b,M,f); 
+%ITR = trapcomp(a,b,M,f);
+%I = 2*IPM/3 + ITR/3;
